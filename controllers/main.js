@@ -15,14 +15,10 @@ const login = async (req, res) => {
 };
 
 const dashboard = async (req, res) => {
-  const authHeader = req.headers.authorization;
-
-  if (!authHeader || !authHeader.startsWith('Bearer ')){
-    throw new CustomApiError('No Token Provided!', 401)
-  }
+  console.log(req.user);
 
   const luckyNumber = Math.floor(Math.random() * 100);
-  res.status(200).json({ msg: "Hello Sami", secret: `your lucky number is ${luckyNumber}` });
+  res.status(200).json({ msg: `Hello ${req.user.username}`, secret: `your lucky number is ${luckyNumber}` });
 };
 
 module.exports = { login, dashboard };
